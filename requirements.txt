@@ -1,0 +1,7 @@
+filelock>=2.0.0
+flask>=2.2.4
+flask_cors>=3.0.8
+requests>=2.25.0
+selenium>=4.11.0
+urllib3>=1.26.5
+xxhash>=1.4.4
