@@ -1,0 +1,17 @@
+# Python cache files
+__pycache__/
+
+# Pyinstaller output
+WabbaDownloader.exe
+_internal/
+WabbaDownloader.spec
+build/
+dist/
+
+# Virtual environments
+venv/
+env/
+
+# Generated files
+logs/
+state/
