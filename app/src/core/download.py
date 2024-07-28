@@ -208,11 +208,14 @@ class Download:
                     'game_id': game_id
                 }
                 post_response: requests.Response = self._session.post(post_url, data=data)
-                if post_response.status_code != 200 or file_name not in post_response.json()['url']:
-                    _logger.error(f"Error while getting direct download link for {file_name}")
-                    return ''
-                _logger.debug(f"Direct download link for {file_name} obtained")
-                return post_response.json()['url']
+                if post_response.status_code == 200:
+                    direct_url: str = post_response.json().get('url', '')
+                    if direct_url and self._session.head(direct_url).status_code == 200:
+                        _logger.debug(f"Direct download link for {file_name} obtained")
+                        return direct_url
+                    
+                _logger.error(f"Error while getting direct download link for {file_name}")
+                return ''
             
             direct_url: str = get_direct_url()
             if not direct_url or state.close_event.is_set():
