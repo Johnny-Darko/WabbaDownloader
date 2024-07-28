@@ -53,6 +53,8 @@ By following this section, you will create an executable file. Simply click it, 
 
 If you want to run it with Python, instead, you can skip this section and go to [Run with Python](#run-with-python)
 
+(Note: The installer will create and delete a virtual environment named `venv` within the project directory. If you plan to create your own virtual environment, please use a different name to avoid conflicts. For development purposes, we use the name `env` for our virtual environment.)
+
 #### On Windows
 
 On Windows, simply run `windows-installer.cmd` and the executable will be created.

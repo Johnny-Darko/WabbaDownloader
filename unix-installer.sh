@@ -99,6 +99,7 @@ while true; do
     echo
     if [[ $REPLY =~ ^[YyNn]$ ]]; then
         if [[ $REPLY =~ ^[Yy]$ ]]; then
+            deleteFile ".gitignore"
             deleteFile "main.py"
             deleteFile "requirements.txt"
             deleteFile "windows-installer.cmd"

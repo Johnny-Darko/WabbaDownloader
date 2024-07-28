@@ -72,6 +72,8 @@ REM Ask the user if they want to remove the source files
 choice /C YN /M "Do you want to remove the source files (you don't need them)"
 if errorlevel 2 goto endif
 
+    call :deleteFile ".gitignore"
+    if errorlevel 1 exit /b %ERRORLEVEL%
     call :deleteFile "main.py"
     if errorlevel 1 exit /b %ERRORLEVEL%
     call :deleteFile "requirements.txt"
