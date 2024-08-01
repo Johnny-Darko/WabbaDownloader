@@ -102,6 +102,7 @@ class Login:
         options: webdriver.ChromeOptions = webdriver.ChromeOptions()
         options.add_experimental_option('excludeSwitches', ['enable-automation'])   # Better looking browser
         options.add_argument('--disable-blink-features=AutomationControlled')   # Necessary to avoid detection
+        options.add_argument("--disable-search-engine-choice-screen")   # Skip engine choice
         options.add_argument(f'--load-extension={paths.CHROME_EXTENSION_FOLDER.absolute()}')   # Used to communicate with the Flask server
         with webdriver.Chrome(options=options) as driver:
             driver.get("https://www.nexusmods.com/")
