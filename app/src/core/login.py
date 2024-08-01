@@ -22,8 +22,6 @@ from flask_cors import CORS
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 from werkzeug import serving
 
 from . import paths
@@ -108,18 +106,6 @@ class Login:
             driver.get("https://www.nexusmods.com/")
             if self._closing:
                 return
-            try:
-                WebDriverWait(driver, 5).until(EC.frame_to_be_available_and_switch_to_it((By.CSS_SELECTOR, 'iframe[title="SP Consent Message"]')))
-                try:
-                    button: WebElement = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[title="Accept"]')))
-                    if self._closing:
-                        return
-                    button.click()
-                except:
-                    _logger.warning("Accept button not found.")
-                driver.switch_to.default_content()
-            except:
-                _logger.warning("Privacy iframe not found.")
             try:
                 login_button: WebElement = driver.find_element(By.ID, 'login')
                 login_link: str | None = login_button.get_attribute('href')
