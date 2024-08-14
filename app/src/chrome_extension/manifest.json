@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Nexus Mods Login Checker",
+  "version": "1.0",
+  "description": "Checks for successful login on Nexus Mods",
+  "permissions": ["activeTab", "storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.nexusmods.com/"],
+      "js": ["content.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
