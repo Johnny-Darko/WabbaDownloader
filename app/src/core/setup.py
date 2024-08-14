@@ -100,7 +100,7 @@ def _create_list(wabbajack_file: Path, modlist_name: str) -> None:
     with state.DownloadInfo().get_modlist_file(modlist_name).open('w') as json_file:
         json.dump(refactored_modlist_data, json_file, indent=4)
     mods_found: int = len(refactored_modlist_data)
-    _logger.info(f"List created successfully. Found {mods_found} mods. {errors} errors occurred.")
+    _logger.info(f"List created successfully. Found {mods_found} mods. {errors} {"error" if errors == 1 else "errors"} occurred.")
 
 def setup_modlist(modlist_name: str) -> bool:
     """
@@ -114,18 +114,19 @@ def setup_modlist(modlist_name: str) -> bool:
     assert modlist_name != '', "modlist_name cannot be empty"
 
     _logger.info(f"Setting up modlist {modlist_name}")
-    download_path: Path = Path(filedialog.askdirectory(title="Select the download folder")).resolve()
-    if not download_path:
-        messagebox.showerror("Error", "You must select a download folder.")
-        _logger.info("No download folder selected")
-        return False
     wabbajack_file: Path = Path(filedialog.askopenfilename(
         title="Select the .wabbajack file",
         filetypes=[("Wabbajack files", "*.wabbajack")]
     ))
-    if not wabbajack_file:
+    if wabbajack_file == Path():
         messagebox.showerror("Error", "You must select a .wabbajack file.")
         return False
+    download_dir: Path = Path(filedialog.askdirectory(title="Select the download folder"))
+    if download_dir == Path():
+        messagebox.showerror("Error", "You must select a download folder.")
+        _logger.info("No download folder selected")
+        return False
+    download_path: Path = download_dir.resolve()
     _create_list(wabbajack_file, modlist_name)
     state.DownloadInfo().set_path(modlist_name, download_path)
     _logger.info(f"Modlist {modlist_name} set up successfully")

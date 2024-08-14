@@ -544,8 +544,6 @@ class MainUI:
                 self.download_combobox.configure(values=tuple(state.DownloadInfo().get_downloads()))
                 self.download_combobox.set(name)
                 _logger.info(f"Modlist {name} created.")
-            else:
-                messagebox.showerror("Error", "The modlist could not be created.")
     
     def _create_start_button(self) -> None:
         """
