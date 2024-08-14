@@ -120,6 +120,7 @@ def setup_modlist(modlist_name: str) -> bool:
     ))
     if wabbajack_file == Path():
         messagebox.showerror("Error", "You must select a .wabbajack file.")
+        _logger.info("No .wabbajack file selected")
         return False
     download_dir: Path = Path(filedialog.askdirectory(title="Select the download folder"))
     if download_dir == Path():
